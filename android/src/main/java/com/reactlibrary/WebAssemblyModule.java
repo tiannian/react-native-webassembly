@@ -3,7 +3,7 @@ package com.reactlibrary;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.bridge.Callback;
+import com.facebook.react.bridge.Promise;
 
 public class WebAssemblyModule extends ReactContextBaseJavaModule {
 
@@ -20,8 +20,8 @@ public class WebAssemblyModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public String addTest(String stringArgument) {
+    public void addTest(String stringArgument, Promise promise) {
         // TODO: Implement some actually useful functionality
-        return stringArgument + " test";
+        promise.resolve(stringArgument + " test");
     }
 }
