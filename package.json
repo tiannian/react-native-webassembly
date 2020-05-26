@@ -1,5 +1,5 @@
 {
-  "name": "react-native-web-assembly",
+  "name": "react-native-webassembly",
   "title": "React Native WebAssembly",
   "version": "1.0.0",
   "description": "WebAssembly in React Native",
@@ -16,8 +16,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tiannian/react-native-web-assembly.git",
-    "baseUrl": "https://github.com/tiannian/react-native-web-assembly"
+    "url": "git+https://github.com/tiannian/react-native-webassembly.git",
+    "baseUrl": "https://github.com/tiannian/react-native-webassembly"
   },
   "keywords": [
     "react-native"
