@@ -4,6 +4,7 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Promise;
+import java.util.Base64.Decoder;
 
 public class WebAssembly extends ReactContextBaseJavaModule {
 
@@ -22,7 +23,7 @@ public class WebAssembly extends ReactContextBaseJavaModule {
     @ReactMethod
     public void instantiate(String stringSource, Promise promise) {
         try {
-            Base64.Decoder decoder = Base64.getDecoder();
+            Decoder decoder = Base64.getDecoder();
             bytes[] buffer = decoder.decode(stringSource);
             CWebAssemblyInstance cwai = CWebAssembly.instantiate(buffer);
             promise.resolve(cwai);
