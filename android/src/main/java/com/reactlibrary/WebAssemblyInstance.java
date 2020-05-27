@@ -5,23 +5,26 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Promise;
 
-public class WebAssemblyModule extends ReactContextBaseJavaModule {
+public class WebAssemblyInstance extends ReactContextBaseJavaModule {
 
     private final ReactApplicationContext reactContext;
 
-    public WebAssemblyModule(ReactApplicationContext reactContext) {
+    public WebAssemblyInstance(ReactApplicationContext reactContext) {
         super(reactContext);
         this.reactContext = reactContext;
     }
 
     @Override
     public String getName() {
-        return "WebAssembly";
+        return "WebAssemblyInstance";
     }
 
-    @ReactMethod
-    public void addTest(String stringArgument, Promise promise) {
-        // TODO: Implement some actually useful functionality
-        promise.resolve(stringArgument + " test");
+    static {
+        System.loadLibrary("wasm");
     }
+
+ /*   @ReactMethod
+    public void instantiate(String bufferSource, Promise promise) {
+
+    }*/
 }
