@@ -25,7 +25,6 @@ public class WebAssembly extends ReactContextBaseJavaModule {
             CWebAssemblyInstance cwai = CWebAssembly.instantiate(bufferSource);
             promise.resolve(cwai);
         } catch(Exception e) {
-            Log.e("NativeMethod");
             promise.reject("NativeMethod", e);
         }
     }
