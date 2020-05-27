@@ -11,7 +11,7 @@ class Global {}
 class Table {}
 
 const WebAssembly = {
-    instantiate = NativeModules.WebAssembly.instantiate,
+    instantiate: NativeModules.WebAssembly.instantiate,
     Module,
     Instance,
     Memory,
