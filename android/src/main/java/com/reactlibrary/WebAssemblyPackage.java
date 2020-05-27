@@ -13,7 +13,7 @@ import com.facebook.react.bridge.JavaScriptModule;
 public class WebAssemblyPackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
-        return Arrays.<NativeModule>asList(new WebAssemblyModule(reactContext));
+        return Arrays.<NativeModule>asList(new WebAssembly(reactContext));
     }
 
     @Override
