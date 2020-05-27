@@ -20,9 +20,11 @@ public class WebAssembly extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void instantiate(byte[] bufferSource, Promise promise) {
+    public void instantiate(String stringSource, Promise promise) {
         try {
-            CWebAssemblyInstance cwai = CWebAssembly.instantiate(bufferSource);
+            Base64.Decoder decoder = Base64.getDecoder();
+            bytes[] buffer = decoder.decode(stringSource);
+            CWebAssemblyInstance cwai = CWebAssembly.instantiate(buffer);
             promise.resolve(cwai);
         } catch(Exception e) {
             promise.reject("NativeMethod", e);
