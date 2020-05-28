@@ -46,7 +46,8 @@ fn instantiate_web_assembly(
     // let mut wasms_mut = f.borrow_mut();
     // wasms_mut.push(instant);
     /* }); */
-    let obj = env.new_object(cl, "<init>", &[JValue::Int(index)])?;
+    let mt = env.get_method_id("com/reactlibrary/CWebAssemblyInstance", "<init>", "(I)V")?;
+    let obj = env.new_object_unchecked(cl, mt, &[JValue::Int(index)])?;
 
     Ok(obj.into_inner())
 }
