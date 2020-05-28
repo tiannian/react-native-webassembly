@@ -23,28 +23,28 @@ impl From<wasmi::Error> for WasmError {
     }
 }
 
-// thread_local! {
-// static WASMS: RefCell<Vec<ModuleRef>> = RefCell::new(Vec::new());
-// }
+thread_local! {
+static WASMS: RefCell<Vec<ModuleRef>> = RefCell::new(Vec::new());
+}
 
 fn instantiate_web_assembly(
     env: &JNIEnv,
     _class: &JClass,
     input: jbyteArray,
 ) -> Result<i32, WasmError> {
-    // let code = env.convert_byte_array(input)?;
-    // let module = wasmi::Module::from_buffer(code)?;
-    // let instant = ModuleInstance::new(&module, &ImportsBuilder::default())?.assert_no_start();
+    let code = env.convert_byte_array(input)?;
+    let module = wasmi::Module::from_buffer(code)?;
+    let instant = ModuleInstance::new(&module, &ImportsBuilder::default())?.assert_no_start();
 
     // create CWebAssemblyInstance object.
-    let index: i32 = 0;
+    let mut index: i32 = 0;
 
-    /*     WASMS.with(|f| { */
-    // let wasms = f.borrow();
-    // index = wasms.len().try_into().unwrap();
-    // let mut wasms_mut = f.borrow_mut();
-    // wasms_mut.push(instant);
-    /* }); */
+    WASMS.with(|f| {
+        let wasms = f.borrow();
+        index = wasms.len().try_into().unwrap();
+        let mut wasms_mut = f.borrow_mut();
+        wasms_mut.push(instant);
+    });
 
     Ok(index)
 }
