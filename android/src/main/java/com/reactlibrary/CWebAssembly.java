@@ -1,7 +1,7 @@
 package com.reactlibrary;
 
 public class CWebAssembly {
-    public static native CWebAssemblyInstance instantiate(byte[] bufferSource);
+    public static native int instantiate(byte[] bufferSource);
 
     static {
         System.loadLibrary("wasm");

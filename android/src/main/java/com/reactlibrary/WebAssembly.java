@@ -25,8 +25,10 @@ public class WebAssembly extends ReactContextBaseJavaModule {
         try {
             Base64.Decoder decoder = Base64.getDecoder();
             byte[] buffer = decoder.decode(stringSource);
-            CWebAssemblyInstance cwai = CWebAssembly.instantiate(buffer);
-            promise.resolve(cwai);
+            WritableMap map = Arguments.createMap();
+            int index = CWebAssembly.instantiate(buffer);
+            map.pushInt("_instant_index", index);
+            promise.resolve(map);
         } catch(Exception e) {
             promise.reject("NativeMethod", e);
         }
