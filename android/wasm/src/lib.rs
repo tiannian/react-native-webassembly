@@ -59,8 +59,8 @@ pub extern "system" fn Java_com_reactlibrary_CWebAssembly_instantiate(
 ) -> jobject {
     match instantiate_web_assembly(&env, &class, input) {
         Ok(v) => v,
-        Err(_) => {
-            let _ = env.throw_new("java/lang/Exception", "something bad happened");
+        Err(e) => {
+            let _ = env.throw_new("java/lang/Exception", format!("{:?}", e));
             let obj = JObject::null();
             obj.into_inner()
         }
