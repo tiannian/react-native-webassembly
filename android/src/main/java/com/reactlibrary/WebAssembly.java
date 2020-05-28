@@ -24,7 +24,7 @@ public class WebAssembly extends ReactContextBaseJavaModule {
     public void instantiate(String stringSource, Promise promise) {
         try {
             Base64.Decoder decoder = Base64.getDecoder();
-            bytes[] buffer = decoder.decode(stringSource);
+            byte[] buffer = decoder.decode(stringSource);
             CWebAssemblyInstance cwai = CWebAssembly.instantiate(buffer);
             promise.resolve(cwai);
         } catch(Exception e) {
