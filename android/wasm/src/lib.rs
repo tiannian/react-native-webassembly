@@ -23,29 +23,29 @@ impl From<wasmi::Error> for WasmError {
     }
 }
 
-thread_local! {
-    static WASMS: RefCell<Vec<ModuleRef>> = RefCell::new(Vec::new());
-}
+// thread_local! {
+// static WASMS: RefCell<Vec<ModuleRef>> = RefCell::new(Vec::new());
+// }
 
 fn instantiate_web_assembly(
     env: &JNIEnv,
     _class: &JClass,
     input: jbyteArray,
 ) -> Result<jobject, WasmError> {
-    let code = env.convert_byte_array(input)?;
-    let module = wasmi::Module::from_buffer(code)?;
-    let instant = ModuleInstance::new(&module, &ImportsBuilder::default())?.assert_no_start();
+    // let code = env.convert_byte_array(input)?;
+    // let module = wasmi::Module::from_buffer(code)?;
+    // let instant = ModuleInstance::new(&module, &ImportsBuilder::default())?.assert_no_start();
 
     // create CWebAssemblyInstance object.
     let cl = env.find_class("com/reactlibrary/CWebAssemblyInstance")?;
     let mut index: i32 = 0;
 
-    WASMS.with(|f| {
-        let wasms = f.borrow();
-        index = wasms.len().try_into().unwrap();
-        let mut wasms_mut = f.borrow_mut();
-        wasms_mut.push(instant);
-    });
+    /*     WASMS.with(|f| { */
+    // let wasms = f.borrow();
+    // index = wasms.len().try_into().unwrap();
+    // let mut wasms_mut = f.borrow_mut();
+    // wasms_mut.push(instant);
+    /* }); */
     let obj = env.new_object(cl, "<init>", &[JValue::Int(index)])?;
 
     Ok(obj.into_inner())
