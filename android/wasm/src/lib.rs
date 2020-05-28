@@ -40,10 +40,9 @@ fn instantiate_web_assembly(
     let mut index: i32 = 0;
 
     WASMS.with(|f| {
-        let wasms = f.borrow();
+        let mut wasms = f.borrow_mut();
         index = wasms.len().try_into().unwrap();
-        let mut wasms_mut = f.borrow_mut();
-        wasms_mut.push(instant);
+        wasms.push(instant);
     });
 
     Ok(index)
